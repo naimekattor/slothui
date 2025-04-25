@@ -377,6 +377,9 @@ html {
   margin-bottom: 10px;
 }
 /* Location section */
+.location-title {
+  text-align: start;
+}
 .location-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -416,8 +419,7 @@ html {
   background-color: #fff;
   margin-bottom: 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .accordion-header {
