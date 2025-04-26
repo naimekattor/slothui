@@ -1,11 +1,7 @@
 // for navbar
 const handleNavbar = () => {
   const mobileNav = document.querySelector(".mobile-nav");
-  if (mobileNav.style.display === "none") {
-    mobileNav.style.display = "block";
-  } else {
-    mobileNav.style.display = "none";
-  }
+  mobileNav.classList.toggle("show");
 };
 const hamburger = document.querySelector(".hamburger");
 hamburger.addEventListener("click", handleNavbar);
@@ -127,13 +123,13 @@ function createTestimonialCard(testimonial) {
   for (let i = 0; i < testimonial.rating; i++) {
     const star = document.createElement("span");
     star.className = "star";
-    star.innerHTML = "&#9733;"; // Full star
+    star.innerHTML = "&#9733;";
     rating.appendChild(star);
   }
   for (let i = testimonial.rating; i < 5; i++) {
     const star = document.createElement("span");
     star.className = "star";
-    star.innerHTML = "&#9734;"; // Empty star
+    star.innerHTML = "&#9734;";
     rating.appendChild(star);
   }
   card.appendChild(rating);
@@ -146,6 +142,34 @@ testimonialData.forEach((testimonial) => {
   const card = createTestimonialCard(testimonial);
   testimonialContainer.appendChild(card);
 });
+
+//For Mobile Testimonial
+
+const screenSize = window.innerWidth;
+if (screenSize < 768) {
+  let visibleTestimonials = 3;
+  testimonialContainer.innerHTML = "";
+  testimonialData.slice(0, visibleTestimonials).forEach((testimonial) => {
+    const card = createTestimonialCard(testimonial);
+    testimonialContainer.appendChild(card);
+  });
+  const tesButton = document.createElement("button");
+  tesButton.innerText = "Load More + ";
+  tesButton.className = "testimonial-button";
+  testimonialContainer.appendChild(tesButton);
+  tesButton.addEventListener("click", () => {
+    visibleTestimonials += 3;
+    testimonialContainer.innerHTML = "";
+    testimonialData.slice(0, visibleTestimonials).forEach((testimonial) => {
+      const card = createTestimonialCard(testimonial);
+      testimonialContainer.appendChild(card);
+    });
+    if (visibleTestimonials >= testimonialData.length) {
+      tesButton.style.display = "none";
+    }
+  });
+}
+console.log(screenSize);
 
 // For Accordian
 const accordionItems = document.querySelectorAll(".accordion-item");

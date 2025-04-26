@@ -2,6 +2,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 body,
 html {
@@ -307,25 +308,11 @@ html {
   border-left: 4px solid #e0e7ff;
 }
 /* testimonial */
-
 #testimonial-container {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem; /* gap-6 */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
-
-@media (min-width: 768px) {
-  #testimonial-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  #testimonial-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 .testimonial-card {
   background-color: #fff;
   border-radius: 0.5rem;
@@ -375,6 +362,16 @@ html {
   margin-right: 0.25rem;
   font-size: 24px;
   margin-bottom: 10px;
+}
+.testimonial-button {
+  background: #4f46e5;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 1234px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
 }
 /* Location section */
 .location-title {
@@ -584,6 +581,9 @@ html {
   .mobile-nav {
     display: none;
   }
+  .testimonial-button {
+    display: none;
+  }
 }
 @media only screen and (max-width: 576px) {
   /* for header */
@@ -604,22 +604,31 @@ html {
     color: green;
   }
   .mobile-nav {
-    display: none;
-    background: black;
+    background: #5348e0;
     color: white;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 80px);
     position: absolute;
-    top: 0;
+    top: 80px;
     left: 0;
+    transition: 0.3s;
     padding: 20px 16px;
-    z-index: 1000;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-nav.show {
+    opacity: 1;
+    transform: translateX(0);
   }
   .mobile-nav-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    padding-top: 32px;
+    gap: 26px !important;
     color: white;
+    font-size: 24px;
+    font-weight: 500;
   }
   .hero-img img {
     width: 100%;
@@ -659,6 +668,14 @@ html {
   }
   .procrastinators-img img {
     width: 100%;
+  }
+  .testimonial-button {
+    display: block;
+  }
+  #testimonial-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   .title {
     font-size: 30px;
